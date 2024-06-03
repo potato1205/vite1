@@ -33,13 +33,5 @@ const value = ref([])
 </script>
 
 <style scoped>
-/* @import "./list-page.scss"; */
-
-.list-page {
-  width: 100%;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+@import "./list-page.scss";
 </style>
