@@ -1,6 +1,6 @@
 <template>
-    <el-button plain @click="changeList">
-        修改diplog
+    <el-button plain @click="changeList(dialogSetObject.clickobj.clickHandle)">
+        {{ dialogSetObject.clickobj.title }}
     </el-button>
 
     <el-dialog v-model="dialogVisible" title="Tips" width="500" :before-close="handleClose">
@@ -11,7 +11,7 @@
                 v-for="(item, index) in dialogSetObject.btnArr" 
                 :key="index"
                 :type="item.type === 1 ? 'primary' : ''" 
-                @click="dialogVisible = false"> {{ item.name }} </el-button>
+                @click="closeDialog(item.click)"> {{ item.name }} </el-button>
             </div>
         </template>
     </el-dialog>
@@ -24,17 +24,23 @@ import { ElMessageBox } from 'element-plus'
 //     type: number;
 //     click: () => void;
 // }
-console.log('defineProps:');
+
+// 如果需要设置初始值，可以使用withDefaults
 const props = defineProps({
-    dialogObj: {}
+    // 可以给props设置默认属性
+    dialogObj: {
+        type: Object,
+        default: () => {}
+    }
 });
 
+// 全部dialog组件的设置信息
 const dialogSetObject = reactive(props.dialogObj)
-
-console.log('dialogSetObject: ', dialogSetObject);
-
+// dialog的显示与隐藏
 const dialogVisible = ref(false)
 
+
+// dialog关闭钩子
 const handleClose = (done: () => void) => {
     ElMessageBox.confirm('Are you sure to close this dialog?')
         .then(() => {
@@ -44,11 +50,16 @@ const handleClose = (done: () => void) => {
             // catch error
         })
 }
-
-// 点击diplog调用的函数
-const changeList = () => {
-    console.log('dialogSetObject: ', dialogSetObject);
-    dialogVisible.value = true
+// 点击diplog
+const changeList = (func?: any) => {
+    console.log('func： ', func);
+    func ? func() : () => {};
+    dialogVisible.value = true;
+}
+// 关闭dialog
+const closeDialog = (func: any) => {
+    func && func();
+    dialogVisible.value = false
 }
 </script>
 

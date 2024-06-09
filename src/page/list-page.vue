@@ -42,10 +42,12 @@ const btnArr = [
     }
   }
 ];
-
+const clickobj = {
+  title: '点击按钮文本'
+}
 const dialogObj = reactive({
   btnArr: btnArr,
-  title: 'lhy'
+  clickobj: clickobj
 })
 
 </script>
