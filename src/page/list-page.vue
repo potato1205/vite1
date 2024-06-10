@@ -47,7 +47,7 @@ const clickobj = {
 }
 const dialogObj = reactive({
   btnArr: btnArr,
-  clickobj: clickobj
+  clickobj: clickobj,
 })
 
 </script>
